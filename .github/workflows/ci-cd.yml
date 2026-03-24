@@ -39,15 +39,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
+          # This tells the robot exactly where the lock file is!
+          cache-dependency-path: './todo-frontend/package-lock.json' 
 
-      - name: Build Frontend
+      - name: Install and Build Frontend
         working-directory: ./todo-frontend
         run: |
-          npm ci
+          npm install
           npm run build
